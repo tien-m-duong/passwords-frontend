@@ -7,12 +7,12 @@
       "default_popup": "popup.html",
       "default_icon": "manager.png"
     },"content_scripts": [
-    {
-      "js": ["scripts/findInputs.js"],
-      "matches": [
-        "https://*/",
-        "https://*/*"
-      ]
-    }
-  ]
+      {
+        "js": ["scripts/findInputs.js"],
+        "matches": [
+          "https://*/",
+          "https://*/*"
+        ]
+      }
+    ]
   }

@@ -14,5 +14,5 @@ if(element) {
     //At this point we have the password input, and we can set its value to anything.
     element.value = 'testinput'
     //Dispatch an input event so the UI knows to update
-    someelement.dispatchEvent(new Event('input'))
+    element.dispatchEvent(new Event('input'))
 }
