@@ -14,5 +14,8 @@
           "https://*/*"
         ]
       }
+    ],
+    "permissions": [
+      "storage"
     ]
   }
