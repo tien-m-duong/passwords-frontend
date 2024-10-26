@@ -1,21 +1,7 @@
-/*chrome.storage.local.get(["loggedin"]).then((result) => {
-    //Get whether the user is logged in, and choose which popup to load based on that.
-    if(result && !window.location.href.includes('popup_alt.html')) {
-        window.location.href = 'popup_alt.html'
-    } else if(window.location.href.includes('popup.html')) {
-        window.location.href = 'popup.html'
-    }
-});*/
-
 //Event DOMContentLoaded runs when everything is fully loaded.
 document.addEventListener('DOMContentLoaded', function() {
-    const buttonEle = document.getElementById("signup")
-    buttonEle.addEventListener("click", (event)=> {
-        window.location.href='signup.html'
-    })
-    
-    //Get the form object
-    const form = document.getElementById("loginForm")
+
+    const form = document.getElementById("signupForm")
 
     //When the submit button is pressed, do something.
     if(!form) {
@@ -48,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch("http://127.0.0.1:8000/api/login", requestOptions)
+            fetch("http://127.0.0.1:8000/api/signup", requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
