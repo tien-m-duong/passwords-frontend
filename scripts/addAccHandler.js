@@ -1,21 +1,12 @@
-/*chrome.storage.local.get(["loggedin"]).then((result) => {
-    //Get whether the user is logged in, and choose which popup to load based on that.
-    if(result && !window.location.href.includes('popup_alt.html')) {
-        window.location.href = 'popup_alt.html'
-    } else if(window.location.href.includes('popup.html')) {
-        window.location.href = 'popup.html'
-    }
-});*/
-
-//Event DOMContentLoaded runs when everything is fully loaded.
 document.addEventListener('DOMContentLoaded', function() {
-    const buttonEle = document.getElementById("signup")
-    buttonEle.addEventListener("click", (event)=> {
-        window.location.href='signup.html'
-    })
-    
     //Get the form object
-    const form = document.getElementById("loginForm")
+    const form = document.getElementById("accForm")
+    let token
+    chrome.storage.local.get(["token"]).then((result) => {
+        token = result.token
+        document.getElementById('error').style.display = "initial"
+        document.getElementById('error').textContent = `${token}`
+    })
 
     //When the submit button is pressed, do something.
     if(!form) {
@@ -28,27 +19,36 @@ document.addEventListener('DOMContentLoaded', function() {
         //Get the username & pasword objects then values
         let usernameTag = document.getElementById("username")
         let passwordTag = document.getElementById("password")
+        let siteTag = document.getElementById("site")
 
         let username = usernameTag.value
         let password = passwordTag.value
+        let site = siteTag.value
 
         //If they're both not empty, do something
         if(password !== '' && username !== '') {
             //Disable the inputs while processing
             usernameTag.setAttribute('disabled',true)
             passwordTag.setAttribute('disabled',true)
+            siteTag.setAttribute('disabled',true)
 
             const formdata = new FormData();
             formdata.append("username", username);
             formdata.append("password", password);
+            formdata.append("site", site);
+            formdata.append("title", site);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Token ${token}`);
             
             const requestOptions = {
               method: "POST",
               body: formdata,
+              headers:myHeaders,
               redirect: "follow"
             };
             
-            fetch("http://127.0.0.1:8000/api/login", requestOptions)
+            fetch("http://127.0.0.1:8000/api/add_account", requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
@@ -59,13 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json()
                  })
               .then((result) => {
-                if(result["token"]) {
-                    chrome.storage.local.set({ "token": result.token }).then(() => {
-                        console.log("Value is set");
-                        window.location.href='popup_alt.html'
-                    });
-                    usernameTag.setAttribute('disabled',false)
-                    passwordTag.setAttribute('disabled',false)
+                if(result["account"]) {
+                    window.location.href='popup_alt.html'
                 }
                 console.log(result)
             })

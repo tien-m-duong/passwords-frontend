@@ -3,6 +3,7 @@
     "name": "Passwords454",
     "description": "A chrome extensions that acts as the front end for a password manager",
     "version": "0.1",
+    "host_permissions": ["https://127.0.0.1/*"],
     "action": {
       "default_popup": "popup.html",
       "default_icon": "manager.png"
