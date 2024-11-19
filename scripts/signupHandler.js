@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  })
               .then((result) => {
                 if(result["token"]) {
-                    chrome.storage.local.set({ "token": result.token }).then(() => {
+                    chrome.storage.local.set({ "token": result["token"] }).then(() => {
                         console.log("Value is set");
                         window.location.href='popup_alt.html'
                     });

@@ -1,11 +1,26 @@
-/*chrome.storage.local.get(["loggedin"]).then((result) => {
+chrome.storage.local.get(["token"]).then((result) => {
     //Get whether the user is logged in, and choose which popup to load based on that.
-    if(result && !window.location.href.includes('popup_alt.html')) {
-        window.location.href = 'popup_alt.html'
-    } else if(window.location.href.includes('popup.html')) {
-        window.location.href = 'popup.html'
-    }
-});*/
+            
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${result.token}`);
+    const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+    };
+    
+    fetch("http://127.0.0.1:8000/api/test_token", requestOptions)
+    .then((response) => {
+        if(response.status == 200) {
+            window.location.href = 'popup_alt.html'
+        }
+        
+    })
+      .catch((error) => {
+        document.getElementById('error').style.display = "initial"
+        console.error(error)
+    });
+});
 
 //Event DOMContentLoaded runs when everything is fully loaded.
 document.addEventListener('DOMContentLoaded', function() {
