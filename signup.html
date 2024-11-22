@@ -1,12 +1,61 @@
-<html></html>
+<html>
+
   <body>
-    <h1>Signup</h1>
-    <form action="" id="signupForm" autocomplete="off">
-      <input type="text" id="username" name="username" placeholder="Username">
-      <input type="password" id="password" name="password" placeholder="Password">
-      <input type="submit" value="Signup">
-    </form>
-    <p id="error" style="display: none;">Please enter all fields</p>
-    <script src="scripts/signupHandler.js"></script>
+    <div class="container">
+      <h1>Account Signup</h1>
+
+      <form action="" id="signupForm" autocomplete="off">
+
+        <div class="input-group">
+          <label for="username">Account Name:</label></br>
+          <input type="text" id="username" name="Username" placeholder="Enter Your Account Name" >
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password:</label></br>
+          <input type="password" id="password" name="Password" placeholder="Enter Your Password">
+        </div>
+
+        <div class="signup-button">
+          <input type="submit" value="Signup">
+        </div>
+
+      </form>
+      <p id="error" style="display: none;">Please enter all fields</p>
+      <script src="scripts/signupHandler.js"></script>
+    </div>
+    
   </body>
+
 </html>
+
+<style>
+  body {
+    h1 {
+      color: rgb(0, 0, 0);
+      font-size: auto;
+    }
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    background-image: url('login2.jpg');
+  }
+  .container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+  }
+  .input-group {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: black;
+  }
+  input[type="submit"]{
+    background-color: #04AA6D; /* Green */
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: auto;
+  }
+</style>
