@@ -1,13 +1,66 @@
-<html></html>
+<html>
   <body>
-    <h1>Login</h1>
-    <form action="" id="loginForm" autocomplete="off">
-      <input type="text" id="username" name="username" placeholder="Username">
-      <input type="password" id="password" name="password" placeholder="Password">
-      <input type="submit" value="Login">
-    </form>
-    <button id="signup">Signup</button>
-    <p id="error" style="display: none;">Please enter all fields</p>
+    <div class="container">
+      <h1>Login Account</h1>
+
+      <form action="" id="loginForm" autocomplete="off">
+
+        <div class="input-group">
+          <label for="username">Username:</label></br>
+          <input type="text" id="username" name="username" placeholder="Enter Your Username">
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password:</label></br>
+          <input type="password" id="password" name="password" placeholder="Enter Your Password">
+        </div>
+
+        <div class = "login-button">
+          <input type="submit" value="Login">
+        </div>
+
+      </form>
+      <button id="signup">Signup</button>
+      <p id="error" style="display: none;">Please enter all fields</p>
+    </div>
     <script src="scripts/loginHandler.js"></script>
   </body>
 </html>
+
+<style>
+  body {
+    h1 {
+      color: rgb(0, 0, 0);
+      font-size: auto;
+    }
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    background-image: url('login2.jpg');
+  }
+  .container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+  }
+  .input-group {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: black;
+  }
+  button{
+    background-color: #04AA6D; /* Green */
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: auto;
+  }
+
+  .login-button input[type="submit"] {
+    background-color: #04AA6D; /* Set background color */
+    color: white; /* Set text color */
+    padding: auto; /* Add padding to the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+</style>
