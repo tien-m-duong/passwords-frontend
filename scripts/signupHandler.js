@@ -1,4 +1,9 @@
 //Event DOMContentLoaded runs when everything is fully loaded.
+let API_URL
+fetch('../variables.json')
+.then(response => response.json())
+.then(data => {API_URL = data.API_URL})
+.catch(error => console.error('Error: ', error))
 document.addEventListener('DOMContentLoaded', function() {
 
     const form = document.getElementById("signupForm")
@@ -34,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch("http://127.0.0.1:8000/api/signup", requestOptions)
+            fetch(`${API_URL}/signup`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"

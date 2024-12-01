@@ -1,3 +1,9 @@
+let API_URL
+fetch('../variables.json')
+.then(response => response.json())
+.then(data => {API_URL = data.API_URL})
+.catch(error => console.error('Error: ', error))
+
 document.addEventListener('DOMContentLoaded', function() {
     const buttonEle = document.getElementById("addacc")
 
@@ -34,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch(`http://127.0.0.1:8000/api/account?site=${website}`, requestOptions)
+            fetch(`${API_URL}/account?site=${website}`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"

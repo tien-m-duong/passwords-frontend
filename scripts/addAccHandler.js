@@ -1,3 +1,12 @@
+let API_URL
+fetch('../variables.json')
+.then(response => response.json())
+.then(data => {API_URL = data.API_URL
+    console.error(API_URL)
+})
+.catch(error => console.error('Error: ', error))
+console.error(API_URL)
+
 document.addEventListener('DOMContentLoaded', function() {
     //Get the form object
     const form = document.getElementById("accForm")
@@ -48,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch("http://127.0.0.1:8000/api/add_account", requestOptions)
+            fetch(`${API_URL}/add_account`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"

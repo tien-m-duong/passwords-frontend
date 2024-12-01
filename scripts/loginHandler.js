@@ -1,25 +1,31 @@
+let API_URL
+
 chrome.storage.local.get(["token"]).then((result) => {
     //Get whether the user is logged in, and choose which popup to load based on that.
-            
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Token ${result.token}`);
-    const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-    };
-    
-    fetch("http://127.0.0.1:8000/api/test_token", requestOptions)
-    .then((response) => {
-        if(response.status == 200) {
-            window.location.href = 'popup_alt.html'
-        }
+    fetch('../variables.json')
+    .then(response => response.json())
+    .then(data => {API_URL = data.API_URL
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Token ${result.token}`);
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
         
+        fetch(`${API_URL}/test_token`, requestOptions)
+        .then((response) => {
+            if(response.status == 200) {
+                window.location.href = 'popup_alt.html'
+            }
+            
+        })
+        .catch((error) => {
+            document.getElementById('error').style.display = "initial"
+            console.error(API_URL)
+        });
     })
-      .catch((error) => {
-        document.getElementById('error').style.display = "initial"
-        console.error(error)
-    });
+    .catch(error => console.error('Error: ', error))
 });
 
 //Event DOMContentLoaded runs when everything is fully loaded.
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch("http://127.0.0.1:8000/api/login", requestOptions)
+            fetch(`${API_URL}login`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
