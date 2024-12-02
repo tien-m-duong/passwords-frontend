@@ -5,19 +5,18 @@ fetch('../variables.json')
 .catch(error => console.error('Error: ', error))
 
 document.addEventListener('DOMContentLoaded', function() {
-    const buttonEle = document.getElementById("addacc")
-
-    buttonEle.addEventListener("click", (event)=> {
-        window.location.href='add_password.html'
-    })
 
     let token
     chrome.storage.local.get(["token"]).then((result) => {
         token = result.token
     })
+    let website
+    chrome.storage.local.get(["website"]).then((result) => {
+        website = result.token
+    })
 
     //Get the form object
-    const form = document.getElementById("passwordform")
+    const form = document.getElementById("mfaform")
 
     //When the submit button is pressed, do something.
     if(!form) {
@@ -26,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener("submit", (event) => {
         event.preventDefault()
         
-        let websiteTag = document.getElementById("website")
-        let website = websiteTag.value
-        if(website !== '') {
-            websiteTag.setAttribute('disabled',true)
+        let codeTag = document.getElementById("code")
+        let code = codeTag.value
+        if(code.length == 6) {
+            codeTag.setAttribute('disabled',true)
 
             const myHeaders = new Headers();
             myHeaders.append("Authorization", `Token ${token}`);
@@ -40,27 +39,27 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch(`${API_URL}/account?site=${website}`, requestOptions)
+            fetch(`${API_URL}/account?site=${website}&token=${code}`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
                     document.getElementById('outputdisplay').textContent = `Code ${response.status}`
-                    websiteTag.setAttribute('disabled',false)
+                    codeTag.setAttribute('disabled',false)
                 }
                 return response.json()
                  })
               .then((result) => {
-                if(result["message"]) {
-                    chrome.storage.local.set({ "website": website }).then(() => {
-                        console.log("Value is set");
-                        window.location.href='mfa.html'
-                    });
+                if(result["account"]) {
+                    document.getElementById('outputdisplay').style.display = "initial"
+                    document.getElementById('outputdisplay').textContent = `${result.account.username,result.account.password}`
+                    codeTag.setAttribute('disabled',false)
+                    window.location.href='popup_alt.html'
                 }
                 console.log(result)
             })
               .catch((error) => {
                 document.getElementById('outputdisplay').style.display = "initial"
-                websiteTag.setAttribute('disabled',false)
+                codeTag.setAttribute('disabled',false)
                 console.error(error)
             });
         }

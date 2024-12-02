@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch(`${API_URL}login`, requestOptions)
+            fetch(`${API_URL}/login`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
