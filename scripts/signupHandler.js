@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         //username now collects emails instead, left as is to perserve functionality
         //Get the username & pasword objects then values
-        let usernameTag = document.getElementById("email")
+        let usernameTag = document.getElementById("username")
         let passwordTag = document.getElementById("password")
 
         let username = usernameTag.value
