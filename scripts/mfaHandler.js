@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     let website
     chrome.storage.local.get(["website"]).then((result) => {
-        website = result.token
+        website = result.website
     })
 
     //Get the form object
