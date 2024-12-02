@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
         //Prevents the browser from attempting to submit on its own
         event.preventDefault()
 
+        //username now collects emails instead, left as is to perserve functionality
         //Get the username & pasword objects then values
-        let usernameTag = document.getElementById("username")
+        let usernameTag = document.getElementById("email")
         let passwordTag = document.getElementById("password")
 
         let username = usernameTag.value
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             passwordTag.setAttribute('disabled',true)
 
             const formdata = new FormData();
-            formdata.append("username", username);
+            formdata.append("email", username);
             formdata.append("password", password);
             
             const requestOptions = {
