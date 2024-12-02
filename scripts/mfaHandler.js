@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let codeTag = document.getElementById("code")
         let code = codeTag.value
         if(code.length == 6) {
+            console.error(`Code Returns:`, code)
             codeTag.setAttribute('disabled',true)
 
             const myHeaders = new Headers();
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch(`${API_URL}/account?site=${website}&token=${code}`, requestOptions)
+            fetch(`${API_URL}/account?token=${code}&site=${website}`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
@@ -62,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 codeTag.setAttribute('disabled',false)
                 console.error(error)
             });
+        } else {
+            document.getElementById('outputdisplay').style.display = "initial"
+            document.getElementById('outputdisplay').textContent = `Code Unusable: ${code}`
         }
     })
 })
