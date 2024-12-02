@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
               redirect: "follow"
             };
             
-            fetch(`${API_URL}/account?site=${website}&mfa=${code}`, requestOptions)
+            fetch(`${API_URL}/account?site=${website}&token=${code}`, requestOptions)
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
