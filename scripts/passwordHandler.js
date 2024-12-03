@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href='add_password.html'
     })
 
+    chrome.storage.local.get(["latestpass"]).then((result) => {
+        if(result.latestpass) {
+            document.getElementById('user-out').style.display = "initial"
+            document.getElementById('user-out').textContent = `Username & Password: ${result.latestpass}`
+            chrome.storage.local.remove(["latestpass"])
+        }
+    })
+
     let token
     chrome.storage.local.get(["token"]).then((result) => {
         token = result.token
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
-                    document.getElementById('outputdisplay').textContent = `Code ${response.status}`
+                    document.getElementById('outputdisplay').textContent = `An error occured, Code ${response.status}, please try again.`
                     websiteTag.removeAttribute('disabled')
                 }
                 return response.json()
@@ -60,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
               .catch((error) => {
                 document.getElementById('outputdisplay').style.display = "initial"
+                document.getElementById('outputdisplay').textContent = `Please enter all fields.`
                 websiteTag.removeAttribute('disabled')
                 console.error(error)
             });

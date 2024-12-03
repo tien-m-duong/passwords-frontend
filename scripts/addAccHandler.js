@@ -1,11 +1,8 @@
 let API_URL
 fetch('../variables.json')
 .then(response => response.json())
-.then(data => {API_URL = data.API_URL
-    console.error(API_URL)
-})
+.then(data => {API_URL = data.API_URL})
 .catch(error => console.error('Error: ', error))
-console.error(API_URL)
 
 document.addEventListener('DOMContentLoaded', function() {
     //Get the form object
@@ -13,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let token
     chrome.storage.local.get(["token"]).then((result) => {
         token = result.token
-        document.getElementById('error').style.display = "initial"
-        document.getElementById('error').textContent = `${token}`
     })
 
     //When the submit button is pressed, do something.
@@ -61,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
-                    document.getElementById('error').textContent = `Code ${response.status}`
+                    document.getElementById('error').textContent = `An error occured, Code ${response.status}, please try again.`
                     usernameTag.removeAttribute('disabled')
                     passwordTag.removeAttribute('disabled')
                 }
@@ -75,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
               .catch((error) => {
                 document.getElementById('error').style.display = "initial"
+                document.getElementById('error').textContent = `An error occured, please try again.`
                 usernameTag.removeAttribute('disabled')
                 passwordTag.removeAttribute('disabled')
                 console.error(error)
@@ -85,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } else {
             document.getElementById('error').style.display = "initial"
+            document.getElementById('error').textContent = `Please enter all fields.`
         }
         //WARNING, console.log() does not work in this section. Consider using document.write() instead.
     })

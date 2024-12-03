@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .then((response) => {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
-                    document.getElementById('error').textContent = `Code ${response.status}`
+                    document.getElementById('error').textContent = `An error occured, Code ${response.status}, please try again.`
                     usernameTag.removeAttribute('disabled')
                     passwordTag.removeAttribute('disabled')
                 }
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
               .catch((error) => {
                 document.getElementById('error').style.display = "initial"
+                document.getElementById('error').textContent = `An error occured, please try again.`
                 usernameTag.removeAttribute('disabled')
                 passwordTag.removeAttribute('disabled')
                 console.error(error)
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } else {
             document.getElementById('error').style.display = "initial"
+            document.getElementById('error').textContent = `Please enter all fields.`
         }
         //WARNING, console.log() does not work in this section. Consider using document.write() instead.
     })
