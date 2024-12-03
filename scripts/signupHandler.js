@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
                     document.getElementById('error').textContent = `Code ${response.status}`
-                    usernameTag.setAttribute('disabled',false)
-                    passwordTag.setAttribute('disabled',false)
+                    usernameTag.removeAttribute('disabled')
+                    passwordTag.removeAttribute('disabled')
                 }
                 return response.json()
                  })
@@ -56,15 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log("Value is set");
                         window.location.href='popup_alt.html'
                     });
-                    usernameTag.setAttribute('disabled',false)
-                    passwordTag.setAttribute('disabled',false)
+                    usernameTag.removeAttribute('disabled')
+                    passwordTag.removeAttribute('disabled')
                 }
                 console.log(result)
             })
               .catch((error) => {
                 document.getElementById('error').style.display = "initial"
-                usernameTag.setAttribute('disabled',false)
-                passwordTag.setAttribute('disabled',false)
+                usernameTag.removeAttribute('disabled')
+                passwordTag.removeAttribute('disabled')
                 console.error(error)
             });
 

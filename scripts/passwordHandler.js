@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
                     document.getElementById('outputdisplay').textContent = `Code ${response.status}`
-                    websiteTag.setAttribute('disabled',false)
+                    websiteTag.removeAttribute('disabled')
                 }
                 return response.json()
                  })
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
               .catch((error) => {
                 document.getElementById('outputdisplay').style.display = "initial"
-                websiteTag.setAttribute('disabled',false)
+                websiteTag.removeAttribute('disabled')
                 console.error(error)
             });
         }

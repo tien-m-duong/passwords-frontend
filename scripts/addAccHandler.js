@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(response.status !==200) {
                     document.getElementById('error').style.display = "initial"
                     document.getElementById('error').textContent = `Code ${response.status}`
-                    usernameTag.setAttribute('disabled',false)
-                    passwordTag.setAttribute('disabled',false)
+                    usernameTag.removeAttribute('disabled')
+                    passwordTag.removeAttribute('disabled')
                 }
                 return response.json()
                  })
@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
             })
               .catch((error) => {
                 document.getElementById('error').style.display = "initial"
-                usernameTag.setAttribute('disabled',false)
-                passwordTag.setAttribute('disabled',false)
+                usernameTag.removeAttribute('disabled')
+                passwordTag.removeAttribute('disabled')
                 console.error(error)
             });
 

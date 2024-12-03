@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(response.status !==200) {
                     document.getElementById('outputdisplay').style.display = "initial"
                     document.getElementById('outputdisplay').textContent = `Code ${response.status}`
-                    codeTag.setAttribute('disabled',false)
+                    codeTag.removeAttribute('disabled')
                 }
                 return response.json()
                  })
@@ -53,14 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(result["account"]) {
                     document.getElementById('outputdisplay').style.display = "initial"
                     document.getElementById('outputdisplay').textContent = `${result.account.username,result.account.password}`
-                    codeTag.setAttribute('disabled',false)
+                    codeTag.removeAttribute('disabled')
                     window.location.href='popup_alt.html'
                 }
                 console.log(result)
             })
               .catch((error) => {
                 document.getElementById('outputdisplay').style.display = "initial"
-                codeTag.setAttribute('disabled',false)
+                codeTag.removeAttribute('disabled')
                 console.error(error)
             });
         } else {
